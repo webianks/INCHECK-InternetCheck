@@ -1,0 +1,99 @@
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#64cacf"
+    >
+
+<RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rl"
+    android:background="#64cacf"
+    tools:context="com.webi.material.MainActivity" >
+
+    
+    
+    
+    
+    <RelativeLayout
+    android:layout_width="400dp"
+    android:layout_height="300dp"
+    android:id="@+id/rl2"
+    android:layout_centerHorizontal="true"
+    android:background="@drawable/connect"
+    
+         >
+          </RelativeLayout>
+          
+    <RelativeLayout
+         android:layout_below="@id/rl2"
+         android:layout_width="fill_parent"
+         android:layout_height="70dp"
+         android:id="@+id/colorRl"
+         android:background="@drawable/my_button"
+         >
+       
+    <Button
+       
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check"
+        android:background="#00ffffff"
+        android:textSize="25sp"
+        android:layout_marginTop="10dip"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        
+        android:id="@+id/but"
+        />
+  <ImageView 
+             
+        android:layout_width="28dp"
+        android:id="@+id/changeImg"
+        android:layout_height="28dp"
+        android:background="@drawable/question"
+        android:layout_toLeftOf="@id/but"
+        android:layout_marginRight="5dip"
+        android:layout_centerVertical="true"
+             />
+    <ProgressBar
+        android:layout_toRightOf="@id/but"
+        android:id="@+id/pBar"
+        android:visibility="invisible"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dip"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+         />
+
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:layout_below="@id/colorRl"
+         android:layout_width="fill_parent"
+         android:visibility="invisible"
+         android:id="@+id/rlBottom"
+         android:layout_height="60dp"
+         android:background="@drawable/my_button"
+        >
+
+      
+
+      <TextView
+          android:id="@+id/connectedText"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:text="Wifi Plus"
+          android:textColor="#ffffff"
+          android:textSize="20sp" />
+
+    </RelativeLayout>
+   
+    
+</RelativeLayout>
+</ScrollView>
