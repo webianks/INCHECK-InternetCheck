@@ -1,6 +1,6 @@
 /*
 
-Ramankit Singh
+Ramankit
 
 http://www.github.com/webianks
 

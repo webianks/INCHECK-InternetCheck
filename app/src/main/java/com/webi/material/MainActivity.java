@@ -48,7 +48,7 @@ import android.widget.TextView;
 
 
 public class MainActivity extends Activity implements OnClickListener {
-	Button bt, ramankit;
+	Button bt;
     ProgressBar pb;
     URLExistAsyncTask task;
     RelativeLayout rl,cl,rlBottom;
