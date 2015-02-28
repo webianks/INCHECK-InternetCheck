@@ -48,12 +48,12 @@ import android.widget.TextView;
 
 
 public class MainActivity extends Activity implements OnClickListener {
-	Button bt, Butt;
+	Button bt;
     ProgressBar pb;
     URLExistAsyncTask task;
     RelativeLayout rl,cl,rlBottom;
     TextView connectedTxt;
-    ImageView iv,connectedImg;
+    ImageView iv;
     
     SpannableString connected,noAccess,connect,checking;
    
