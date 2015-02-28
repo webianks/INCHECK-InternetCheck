@@ -1,3 +1,12 @@
+/*
+
+Ramankit Singh
+
+http://www.github.com/webianks
+
+*/
+
+
 package com.webi.material;
 
 
@@ -182,7 +191,7 @@ public class MainActivity extends Activity implements OnClickListener {
         	
         	pb.setVisibility(View.INVISIBLE);
         	rlBottom.setVisibility(View.VISIBLE);
-        	
+
         	if(result==true)
         	{
         		
