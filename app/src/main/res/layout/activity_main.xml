@@ -2,101 +2,55 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_containerRl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="invisible"
-    android:id="@+id/main_containerRl"
-    >
+    android:visibility="visible">
 
-<include
-    layout="@layout/my_toolbar"
-    android:id="@+id/toolbar"
-    />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/my_toolbar" />
+
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_below="@id/toolbar"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#283593"
-       >
+        android:layout_below="@id/toolbar"
+        android:background="#263238">
 
 
         <RelativeLayout
 
-            android:layout_marginTop="-50dp"
-            android:layout_gravity="center"
             android:id="@+id/rl"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:background="#283593"
+            android:layout_gravity="center"
+            android:background="#263238"
             tools:context="com.webi.material.MainActivity">
 
 
-
-
-            <RelativeLayout
-                android:id="@+id/colorRl"
+            <Button
+                android:id="@+id/but"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_centerInParent="true"
-                android:background="@drawable/my_button">
-
-                <Button
-
-                    android:id="@+id/but"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dip"
-                    android:background="#00ffffff"
-                    android:text="Check"
-                    android:textColor="#ffffff"
-                    android:textSize="22sp" />
-
-                <ImageView
-
-                    android:id="@+id/changeImg"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_below="@id/but"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginRight="5dip"
-                    android:background="@drawable/question" />
-
-                <ProgressBar
-                    android:id="@+id/pBar"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_below="@id/but"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dip"
-                    android:layout_marginTop="8dp"
-                    android:visibility="invisible" />
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:id="@+id/rlBottom"
-                android:layout_width="fill_parent"
-                android:layout_height="60dp"
-                android:layout_below="@id/colorRl"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:background="@drawable/my_button"
-                android:visibility="invisible">
+                android:layout_margin="20dp"
+                android:text="Check"
+                android:padding="12dp"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
 
 
-                <TextView
-                    android:id="@+id/connectedText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text=""
-                    android:textColor="#ffffff"
-                    android:textSize="20sp" />
-
-            </RelativeLayout>
-
+            <ProgressBar
+                android:id="@+id/pBar"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/but"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dip"
+                android:visibility="invisible" />
 
         </RelativeLayout>
     </ScrollView>

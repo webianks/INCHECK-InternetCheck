@@ -32,7 +32,7 @@
 
 <RelativeLayout
 
-    android:layout_marginTop="-50dp"
+    android:layout_marginTop="-20dp"
     android:layout_gravity="center"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
@@ -40,37 +40,35 @@
     android:background="#B71C1C"
     tools:context="com.webi.material.MainActivity" >
 
-    <RelativeLayout
-         android:layout_centerInParent="true"
-         android:layout_width="fill_parent"
-         android:layout_height="fill_parent"
-         android:id="@+id/colorRl"
-         android:background="@drawable/my_button_error"
-         >
-       
     <Button
-       
-        android:layout_width="wrap_content"
+
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="No Internet Access"
         android:background="#00ffffff"
-        android:textSize="22sp"
-        android:layout_marginTop="10dip"
+        android:textSize="18sp"
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
         android:id="@+id/buttonError"
         />
-  <ImageView 
 
-        android:layout_width="28dp"
-        android:id="@+id/changeImg"
-        android:layout_height="28dp"
-        android:background="@drawable/disconnect"
+    <Button
+
         android:layout_below="@id/buttonError"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="RECHECK"
+        android:padding="12dp"
+        android:background="@drawable/my_button"
+        android:textSize="22sp"
         android:layout_centerHorizontal="true"
-        android:layout_marginRight="5dip"
-             />
+        android:textColor="#ffffff"
+        android:id="@+id/retryError"
+        />
+
     <ProgressBar
+        android:layout_below="@id/retryError"
         android:layout_toRightOf="@id/but"
         android:id="@+id/pBar"
         android:visibility="invisible"
@@ -82,34 +80,8 @@
         android:layout_centerHorizontal="true"
          />
 
-    </RelativeLayout>
 
 
-
-
-    <RelativeLayout 
-        android:layout_below="@id/colorRl"
-         android:layout_width="fill_parent"
-         android:visibility="invisible"
-         android:id="@+id/rlBottom"
-         android:layout_height="60dp"
-         android:background="@drawable/my_button"
-        >
-
-      
-
-      <TextView
-          android:id="@+id/connectedText"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_centerHorizontal="true"
-          android:text="Wifi Plus"
-          android:textColor="#ffffff"
-          android:textSize="18sp" />
-
-    </RelativeLayout>
-   
-    
 </RelativeLayout>
 </ScrollView>
 </RelativeLayout>

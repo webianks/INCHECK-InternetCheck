@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="invisible"
+    android:visibility="visible"
     android:id="@+id/main_container_connectedRl"
     >
 
@@ -29,10 +29,8 @@
     android:layout_height="match_parent"
     android:background="#4CAF50">
 
-
 <RelativeLayout
-
-    android:layout_marginTop="-50dp"
+    android:layout_marginTop="-20dp"
     android:layout_gravity="center"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
@@ -40,21 +38,10 @@
     android:background="#4CAF50"
     tools:context="com.webi.material.MainActivity" >
 
-
-
-
-    <RelativeLayout
-
-         android:layout_centerInParent="true"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:id="@+id/colorRl"
-         android:background="@drawable/my_button_connected"
-         >
        
     <Button
        
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Internet Access"
         android:background="#00ffffff"
@@ -64,44 +51,7 @@
         android:textColor="#ffffff"
         android:id="@+id/buttonConnected"
         />
-  <ImageView 
 
-        android:layout_width="28dp"
-        android:id="@+id/changeImg"
-        android:layout_height="28dp"
-        android:background="@drawable/tick"
-        android:layout_below="@id/buttonConnected"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="5dip"
-             />
-    <ProgressBar
-        android:layout_toRightOf="@id/but"
-        android:id="@+id/pBar"
-        android:visibility="invisible"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dip"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-         />
-
-    </RelativeLayout>
-
-
-
-
-    <RelativeLayout
-        android:layout_below="@id/colorRl"
-         android:layout_width="fill_parent"
-         android:layout_marginTop="70dp"
-         android:visibility="visible"
-         android:id="@+id/rlBottom"
-         android:layout_height="60dp"
-         android:background="@drawable/my_button_connected"
-        >
-
-      
 
       <TextView
           android:id="@+id/connectedTextInConnected"
@@ -112,9 +62,31 @@
           android:textColor="#ffffff"
           android:textSize="18sp" />
 
-    </RelativeLayout>
-   
-    
+
+    <Button
+        android:id="@+id/retrySuccess"
+        android:layout_margin="20dp"
+        android:background="@drawable/my_button"
+        android:layout_width="fill_parent"
+        android:text="REFRESH / RECHECK"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonConnected"
+        />
+
+    <ProgressBar
+        android:layout_below="@id/retrySuccess"
+        android:id="@+id/pBar"
+        android:visibility="invisible"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dip"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+
 </RelativeLayout>
 </ScrollView>
 </RelativeLayout>
