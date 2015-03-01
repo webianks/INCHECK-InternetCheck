@@ -17,7 +17,9 @@ package com.webi.material;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import android.animation.Animator;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +32,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.util.LruCache;
 import android.telephony.TelephonyManager;
@@ -37,15 +40,19 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.style.MetricAffectingSpan;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 
@@ -56,8 +63,13 @@ public class MainActivity extends Activity implements OnClickListener {
     RelativeLayout rl, cl, rlBottom;
     TextView connectedTxt;
     ImageView iv;
+    ScrollView mainContainer;
+    Typeface font;
 
     SpannableString connected, noAccess, connect, checking;
+    private ScrollView mainContainerError,mainContainerConnected;
+    Button bError;
+    private Button bConnected;
 
 
     @SuppressLint("NewApi")
@@ -67,16 +79,33 @@ public class MainActivity extends Activity implements OnClickListener {
 
         setContentView(R.layout.activity_main);
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
-            getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2c3e50")));
-        }
-
-
         button = (Button) findViewById(R.id.but);
+        button.setTransformationMethod(null);
+        bError= (Button) findViewById(R.id.buttonError);
+        bError.setTransformationMethod(null);
+        bConnected= (Button) findViewById(R.id.buttonConnected);
+        bConnected.setTransformationMethod(null);
+
+
         pb = (ProgressBar) findViewById(R.id.pBar);
         rl = (RelativeLayout) findViewById(R.id.rl);
         cl = (RelativeLayout) findViewById(R.id.colorRl);
         rlBottom = (RelativeLayout) findViewById(R.id.rlBottom);
+        mainContainer= (ScrollView) findViewById(R.id.main_container);
+        mainContainerError=(ScrollView) findViewById(R.id.main_container_error);
+        mainContainerConnected= (ScrollView) findViewById(R.id.main_container_connected);
+
+
+        mainContainer.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+            @Override
+            public void onGlobalLayout() {
+                mainContainer.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                circularReveal(mainContainer,700,00);
+            }
+        });
+
+
 
         iv = (ImageView) findViewById(R.id.changeImg);
         //connectedImg=(ImageView) findViewById(R.id.connectedLogo);
@@ -92,9 +121,63 @@ public class MainActivity extends Activity implements OnClickListener {
         checking.setSpan(new TypefaceSpan(this, "Roboto-Thin.ttf"), 0, checking.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-
+        font = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
+        bError.setTypeface(font);
+        bConnected.setTypeface(font);
         button.setText(connect);
     }
+
+
+
+
+
+
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void circularReveal(final View view, final long duration, long startDelay) {
+
+        // get the center for the clipping circle
+        int cx = (view.getLeft() + view.getRight());
+        int cy = (view.getTop() + view.getBottom());
+
+        // get the final radius for the clipping circle
+        // int radius = Math.max(view.getWidth(), view.getHeight());
+        int finalRadius = (int)Math.hypot(view.getRight(),view.getBottom());
+
+        // create the animator for this view (the start radius is zero)
+        Animator anim =
+                ViewAnimationUtils.createCircularReveal(view, cx, cy, 0, finalRadius);
+
+        anim.setDuration(duration);
+        anim.setStartDelay(startDelay);
+
+        anim.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+                view.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+            }
+        });
+
+        // make the view visible and start the animation
+
+        anim.start();
+    }
+
+
+
 
 
     @SuppressWarnings("deprecation")
@@ -127,9 +210,6 @@ public class MainActivity extends Activity implements OnClickListener {
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
-        noAccess = new SpannableString("No Connection");
-        noAccess.setSpan(new TypefaceSpan(this, "Roboto-Thin.ttf"), 0, noAccess.length(),
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
     }
@@ -184,7 +264,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
             if (result == true) {
 
-                button.setText(connected);
+               /* button.setText(connected);
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
                     iv.setBackground(getResources().getDrawable(R.drawable.tick));
                 } else {
@@ -192,7 +272,12 @@ public class MainActivity extends Activity implements OnClickListener {
                 }
 
 
-                cl.setBackgroundColor(Color.parseColor("#4CAF50"));
+                cl.setBackgroundColor(Color.parseColor("#4CAF50"));*/
+
+                circularReveal(mainContainerConnected,500,00);
+
+
+
 
                 if (isConnectedWifi(getApplicationContext())) {
 
@@ -235,6 +320,10 @@ public class MainActivity extends Activity implements OnClickListener {
                             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
                     connectedTxt.setText(carrierText);
+
+
+
+
                 } else {
                     rlBottom.setBackgroundColor(Color.parseColor("#4CAF50"));
                     SpannableString blueText = new SpannableString("via Bluetooth");
@@ -245,15 +334,26 @@ public class MainActivity extends Activity implements OnClickListener {
                 }
 
 
-            } else {
-                rlBottom.setVisibility(View.INVISIBLE);
-                button.setText(noAccess);
+            }
+
+            else {
+
+                //no internet access
+                /*rlBottom.setVisibility(View.INVISIBLE);
+
                 cl.setBackgroundColor(Color.parseColor("#B71C1C"));
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
                     iv.setBackground(getResources().getDrawable(R.drawable.disconnect));
                 } else {
                     iv.setBackgroundDrawable(getResources().getDrawable(R.drawable.disconnect));
-                }
+                }*/
+
+
+
+
+                        circularReveal(mainContainerError,500,00);
+
+
 
             }
         }

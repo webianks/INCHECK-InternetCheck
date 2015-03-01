@@ -1,24 +1,12 @@
-<RelativeLayout
-
+<ScrollView 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="#8BC34A"
+    android:id="@+id/main_container_connected"
+    android:visibility="invisible"
     >
-
-
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#283593"
-    android:id="@+id/main_container"
-    android:visibility="visible"
-    >
-
-
 
 <RelativeLayout
 
@@ -26,40 +14,37 @@
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:id="@+id/rl"
-    android:background="#283593"
+    android:background="#8BC34A"
     tools:context="com.webi.material.MainActivity" >
 
-    
-
-          
     <RelativeLayout
          android:layout_centerInParent="true"
          android:layout_width="fill_parent"
          android:layout_height="fill_parent"
          android:id="@+id/colorRl"
-         android:background="@drawable/my_button"
+         android:background="@drawable/my_button_connected"
          >
        
     <Button
        
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check"
+        android:text="Internet Access"
         android:background="#00ffffff"
         android:textSize="25sp"
         android:layout_marginTop="10dip"
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
-        android:id="@+id/but"
+        android:id="@+id/buttonConnected"
         />
   <ImageView 
 
         android:layout_width="28dp"
         android:id="@+id/changeImg"
         android:layout_height="28dp"
-        android:background="@drawable/question"
-        android:layout_below="@id/but"
-       android:layout_centerHorizontal="true"
+        android:background="@drawable/tick"
+        android:layout_below="@id/buttonConnected"
+        android:layout_centerHorizontal="true"
         android:layout_marginRight="5dip"
              />
     <ProgressBar
@@ -104,12 +89,3 @@
     
 </RelativeLayout>
 </ScrollView>
-
-    <include
-        layout="@layout/error"
-        />
-
-    <include
-        layout="@layout/connected"
-        />
-</RelativeLayout>
