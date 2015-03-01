@@ -60,7 +60,7 @@
         android:layout_margin="20dp"
         android:text="RECHECK"
         android:padding="12dp"
-        android:background="@drawable/my_button"
+        android:background="@drawable/button_selector"
         android:textSize="22sp"
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
