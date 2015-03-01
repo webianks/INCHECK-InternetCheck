@@ -1,26 +1,53 @@
-<ScrollView 
+<RelativeLayout
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8BC34A"
-    android:id="@+id/main_container_connected"
     android:visibility="invisible"
+    android:id="@+id/main_container_connectedRl"
     >
+
+
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    android:id="@+id/toolbar2"
+    android:background="#4CAF50"
+    />
+
+<ScrollView
+
+    android:layout_below="@id/toolbar2"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4CAF50">
+
 
 <RelativeLayout
 
+    android:layout_marginTop="-50dp"
     android:layout_gravity="center"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:id="@+id/rl"
-    android:background="#8BC34A"
+    android:background="#4CAF50"
     tools:context="com.webi.material.MainActivity" >
 
+
+
+
     <RelativeLayout
+
          android:layout_centerInParent="true"
          android:layout_width="fill_parent"
-         android:layout_height="fill_parent"
+         android:layout_height="wrap_content"
          android:id="@+id/colorRl"
          android:background="@drawable/my_button_connected"
          >
@@ -31,7 +58,7 @@
         android:layout_height="wrap_content"
         android:text="Internet Access"
         android:background="#00ffffff"
-        android:textSize="25sp"
+        android:textSize="22sp"
         android:layout_marginTop="10dip"
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
@@ -64,28 +91,30 @@
 
 
 
-    <RelativeLayout 
+    <RelativeLayout
         android:layout_below="@id/colorRl"
          android:layout_width="fill_parent"
-         android:visibility="invisible"
+         android:layout_marginTop="70dp"
+         android:visibility="visible"
          android:id="@+id/rlBottom"
          android:layout_height="60dp"
-         android:background="@drawable/my_button"
+         android:background="@drawable/my_button_connected"
         >
 
       
 
       <TextView
-          android:id="@+id/connectedText"
+          android:id="@+id/connectedTextInConnected"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_centerHorizontal="true"
           android:text="Wifi Plus"
           android:textColor="#ffffff"
-          android:textSize="20sp" />
+          android:textSize="18sp" />
 
     </RelativeLayout>
    
     
 </RelativeLayout>
 </ScrollView>
+</RelativeLayout>

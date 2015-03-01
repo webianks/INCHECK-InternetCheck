@@ -16,7 +16,7 @@
           android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="v1.0"
+        android:text="v2.0"
         android:layout_below="@id/textView1"
         android:textColor="#757575"
         android:textSize="18sp"

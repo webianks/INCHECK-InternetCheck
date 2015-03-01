@@ -35,6 +35,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.util.LruCache;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -56,20 +58,23 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends ActionBarActivity implements OnClickListener {
     Button button;
     ProgressBar pb;
     URLExistAsyncTask task;
     RelativeLayout rl, cl, rlBottom;
-    TextView connectedTxt;
+    TextView connectedTxt,ctdTxtInCtd;
     ImageView iv;
-    ScrollView mainContainer;
+    RelativeLayout mainContainerRl;
     Typeface font;
 
     SpannableString connected, noAccess, connect, checking;
-    private ScrollView mainContainerError,mainContainerConnected;
+    private RelativeLayout mainContainerErrorRl,mainContainerConnectedRl;
     Button bError;
     private Button bConnected;
+    private Toolbar toolBar;
+    private Toolbar toolBar2;
+    private Toolbar toolBar3;
 
 
     @SuppressLint("NewApi")
@@ -78,6 +83,12 @@ public class MainActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        
+        toolBar=(Toolbar)findViewById(R.id.toolbar);
+        toolBar2=(Toolbar)findViewById(R.id.toolbar2);
+        toolBar3=(Toolbar)findViewById(R.id.toolbar3);
+        setSupportActionBar(toolBar);
+
 
         button = (Button) findViewById(R.id.but);
         button.setTransformationMethod(null);
@@ -85,23 +96,25 @@ public class MainActivity extends Activity implements OnClickListener {
         bError.setTransformationMethod(null);
         bConnected= (Button) findViewById(R.id.buttonConnected);
         bConnected.setTransformationMethod(null);
+        
 
 
         pb = (ProgressBar) findViewById(R.id.pBar);
         rl = (RelativeLayout) findViewById(R.id.rl);
         cl = (RelativeLayout) findViewById(R.id.colorRl);
         rlBottom = (RelativeLayout) findViewById(R.id.rlBottom);
-        mainContainer= (ScrollView) findViewById(R.id.main_container);
-        mainContainerError=(ScrollView) findViewById(R.id.main_container_error);
-        mainContainerConnected= (ScrollView) findViewById(R.id.main_container_connected);
+
+        mainContainerRl= (RelativeLayout) findViewById(R.id.main_containerRl);
+        mainContainerErrorRl= (RelativeLayout) findViewById(R.id.main_container_errorRl);
+        mainContainerConnectedRl= (RelativeLayout) findViewById(R.id.main_container_connectedRl);
 
 
-        mainContainer.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        mainContainerRl.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
             @Override
             public void onGlobalLayout() {
-                mainContainer.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                circularReveal(mainContainer,700,00);
+                mainContainerRl.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                circularReveal(mainContainerRl,700,00);
             }
         });
 
@@ -110,18 +123,19 @@ public class MainActivity extends Activity implements OnClickListener {
         iv = (ImageView) findViewById(R.id.changeImg);
         //connectedImg=(ImageView) findViewById(R.id.connectedLogo);
         connectedTxt = (TextView) findViewById(R.id.connectedText);
+        ctdTxtInCtd=(TextView)findViewById(R.id.connectedTextInConnected);
 
         button.setOnClickListener(this);
 
         connect = new SpannableString("Check");
-        connect.setSpan(new TypefaceSpan(this, "Roboto-Thin.ttf"), 0, connect.length(),
+        connect.setSpan(new TypefaceSpan(this, "RobotoSlab-Regular.ttf"), 0, connect.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         checking = new SpannableString("Checking");
         checking.setSpan(new TypefaceSpan(this, "Roboto-Thin.ttf"), 0, checking.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        font = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
+        font = Typeface.createFromAsset(getAssets(), "fonts/RobotoSlab-Regular.ttf");
         bError.setTypeface(font);
         bConnected.setTypeface(font);
         button.setText(connect);
@@ -274,15 +288,14 @@ public class MainActivity extends Activity implements OnClickListener {
 
                 cl.setBackgroundColor(Color.parseColor("#4CAF50"));*/
 
-                circularReveal(mainContainerConnected,500,00);
-
+                circularReveal(mainContainerConnectedRl, 500, 00);
+                setSupportActionBar(toolBar2);
 
 
 
                 if (isConnectedWifi(getApplicationContext())) {
 
 
-                    rlBottom.setBackgroundColor(Color.parseColor("#4CAF50"));
                     getApplicationContext();
                     WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                     WifiInfo wifiInfo = wifiManager.getConnectionInfo();
@@ -295,15 +308,15 @@ public class MainActivity extends Activity implements OnClickListener {
 
 
                     SpannableString ssidText = new SpannableString(ssid);
-                    ssidText.setSpan(new TypefaceSpan(getApplicationContext(), "Roboto-Thin.ttf"), 0, ssidText.length(),
+                    ssidText.setSpan(new TypefaceSpan(getApplicationContext(), "RobotoSlab-Regular.ttf"), 0, ssidText.length(),
                             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
-                    connectedTxt.setText(ssidText);
+                    ctdTxtInCtd.setText(ssidText);
 
                 } else if (isConnectedMobile(getApplicationContext())) {
 
-                    rlBottom.setBackgroundColor(Color.parseColor("#4CAF50"));
+
 
                     TelephonyManager manager = (TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
                     String carrierName = manager.getNetworkOperatorName();
@@ -316,21 +329,21 @@ public class MainActivity extends Activity implements OnClickListener {
 
 
                     SpannableString carrierText = new SpannableString(carrierName);
-                    carrierText.setSpan(new TypefaceSpan(getApplicationContext(), "Roboto-Thin.ttf"), 0, carrierText.length(),
+                    carrierText.setSpan(new TypefaceSpan(getApplicationContext(), "RobotoSlab-Regular.ttf"), 0, carrierText.length(),
                             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-                    connectedTxt.setText(carrierText);
+                    ctdTxtInCtd.setText(carrierText);
 
 
 
 
                 } else {
-                    rlBottom.setBackgroundColor(Color.parseColor("#4CAF50"));
+
                     SpannableString blueText = new SpannableString("via Bluetooth");
-                    blueText.setSpan(new TypefaceSpan(getApplicationContext(), "Roboto-Thin.ttf"), 0, blueText.length(),
+                    blueText.setSpan(new TypefaceSpan(getApplicationContext(), "RobotoSlab-Regular.ttf"), 0, blueText.length(),
                             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-                    connectedTxt.setText(blueText);
+                    ctdTxtInCtd.setText(blueText);
                 }
 
 
@@ -351,7 +364,9 @@ public class MainActivity extends Activity implements OnClickListener {
 
 
 
-                        circularReveal(mainContainerError,500,00);
+                        circularReveal(mainContainerErrorRl,500,00);
+                        setSupportActionBar(toolBar3);
+
 
 
 
